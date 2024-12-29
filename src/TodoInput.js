@@ -17,27 +17,29 @@ function TodoInput({addTodo}) {
             display: 'flex',
             justifyContent: 'space-between',
             marginBottom: '20px',
+            flexWrap: 'wrap',
         },
         input: {
             flex: 1,
             padding: '15px',
-            marginRight: '10px',
             borderRadius: '5px',
-            border: isInputHovered? '1px solid #757575' :'1px solid #676620',
+            border: isInputHovered? '1px solid #999999' :'1px solid #CCCCCC',
             outline: 'none',
             transition: 'border-color 0.5s',
-            background: '#fcfbf7', 
             color: '#676620',
+            width: '100%',
+            marginBottom: '10px',
             fontSize: '18px'
         },
         button: {
             padding: '10px 20px',
-            backgroundColor: isButtonHovered ? '#676620' :"#AD9446",
+            background: isButtonHovered ? '#32A06C' :"#3BAF7A",
             color: '#fff',
             border: 'none',
             cursor: 'pointer',
-            transition: 'background-color 0.5s',
+            transition: 'background 0.5s',
             borderRadius: '5px',
+            width: '100%',
             fontSize: '18px'
         }, 
     }
@@ -52,6 +54,9 @@ function TodoInput({addTodo}) {
         style={ styles.input }
         onMouseEnter={() => setIsInputHovered(true)}
         onMouseLeave={() => setIsInputHovered(false)}
+        onKeyDown={(e) => {
+            if (e.key === 'Enter') handleAdd();
+          }}
       />
        <button 
             onClick={handleAdd} 
@@ -64,7 +69,5 @@ function TodoInput({addTodo}) {
     </div>
   )
 }
-
-
 
 export default TodoInput

@@ -6,11 +6,84 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #F6FFC4, #E3DF81, #EFF6E0);
+  background: linear-gradient(135deg, #F9FAFB, #E3E6EA);
   height: 100vh;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Default (PC/Laptop) styles already apply */
+
+/* Tablet styles */
+@media (max-width: 768px) {
+  body {
+    background: linear-gradient(135deg, #F9FAFB, #DEE1E6);
+    padding: 10px;
+  }
+
+  .container {
+    max-width: 90%;
+    margin: 20px auto;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  label{
+    font-size: 18px;
+  }
+
+  input {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 480px) {
+  body {
+    padding: 5px;
+  }
+
+  .container {
+    max-width: 100%;
+    margin: 10px auto;
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+
+  label{
+    font-size: 14px;
+  }
+
+  input {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  button {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  ul {
+    padding: 0;
+  }
+
+  li {
+    font-size: 14px;
+    flex-direction: column; /* Stack elements */
+    align-items: flex-start;
+  }
 }
