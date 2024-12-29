@@ -28,7 +28,7 @@ function App() {
 
   const startEditing = (index) => {
     setEditIndex(index);
-    setEditValue(todos[index]); // Pre-fill input with the current task
+    setEditValue(todos[index]); 
   };
 
   const saveEdit = () => {
@@ -36,7 +36,7 @@ function App() {
       i === editIndex ? editValue : todo
     );
     setTodos(updatedTodos);
-    setEditIndex(null); // Exit edit mode
+    setEditIndex(null); 
     setEditValue('');
   };
 
@@ -70,19 +70,20 @@ export default App;
 
 const styles = {
   container: {
-    maxWidth: '500px',
+    maxWidth: '600px',
     margin: '100px auto',
-    padding: '25px',
+    padding: '20px',
     background: '#FFFFFF',
     borderRadius: '10px',
     boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)', 
-    border: '1px solid #E0E0E0'
+    border: '1px solid #E0E0E0',
+    width: '90%',
   },
   title: {
     textAlign: 'center',
     marginBottom: '20px',
     color: '#4A4A4A',
-    fontSize: '48px'
+    fontSize: '3rem'
   },
   label: {
     display: 'block',

@@ -15,9 +15,6 @@ code {
     monospace;
 }
 
-/* Default (PC/Laptop) styles already apply */
-
-/* Tablet styles */
 @media (max-width: 768px) {
   body {
     background: linear-gradient(135deg, #F9FAFB, #DEE1E6);
@@ -48,7 +45,6 @@ code {
   }
 }
 
-/* Mobile styles */
 @media (max-width: 480px) {
   body {
     padding: 5px;
@@ -83,7 +79,7 @@ code {
 
   li {
     font-size: 14px;
-    flex-direction: column; /* Stack elements */
+    flex-direction: column; 
     align-items: flex-start;
   }
 }
