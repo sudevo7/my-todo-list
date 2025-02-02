@@ -8,6 +8,7 @@ function App() {
   const [editValue, setEditValue] = useState('');
   const [completed, setCompleted] = useState([]);
 
+  // Load from localStorage
   useEffect(() => {
     const savedTodos = JSON.parse(localStorage.getItem('todos')) || [];
     const savedCompleted = JSON.parse(localStorage.getItem('completed')) || [];
@@ -15,21 +16,21 @@ function App() {
     setCompleted(savedCompleted);
   }, []);
 
+  // Save to localStorage
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
     localStorage.setItem('completed', JSON.stringify(completed));
   }, [todos, completed]);
 
   const addTodo = (newTodo) => {
+    if (newTodo.trim() === '') return;
     setTodos([...todos, newTodo]);
-    setCompleted([...completed, false]); 
+    setCompleted([...completed, false]);
   };
 
   const deleteTodo = (index) => {
-    const updatedTodos = todos.filter((_, i) => i !== index);
-    const updatedCompleted = completed.filter((_, i) => i !== index);
-    setTodos(updatedTodos);
-    setCompleted(updatedCompleted);
+    setTodos(todos.filter((_, i) => i !== index));
+    setCompleted(completed.filter((_, i) => i !== index));
   };
 
   const toggleDone = (index) => {
@@ -46,10 +47,8 @@ function App() {
   };
 
   const saveEdit = () => {
-    const updatedTodos = todos.map((todo, i) =>
-      i === editIndex ? editValue : todo
-    );
-    setTodos(updatedTodos);
+    if (editValue.trim() === '') return;
+    setTodos(todos.map((todo, i) => (i === editIndex ? editValue : todo)));
     setEditIndex(null);
     setEditValue('');
   };
@@ -83,7 +82,7 @@ export default App;
 
 const styles = {
   container: {
-    maxWidth: '900px',
+    maxWidth: '600px',
     margin: '50px auto',
     padding: '40px',
     background: '#FFFFFF',
@@ -93,7 +92,7 @@ const styles = {
   },
   title: {
     textAlign: 'center',
-    marginBottom: '30px',
+    marginBottom: '20px',
     color: '#2C3E50',
     fontSize: '2.5rem',
     fontWeight: '600',
