@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TodoInput from './TodoInput';
 import TodoList from './TodoList';
 
@@ -8,9 +8,22 @@ function App() {
   const [editValue, setEditValue] = useState('');
   const [completed, setCompleted] = useState([]);
 
+  useEffect(() => {
+    const savedTodos = JSON.parse(localStorage.getItem('todos')) || [];
+    const savedCompleted = JSON.parse(localStorage.getItem('completed')) || [];
+    setTodos(savedTodos);
+    setCompleted(savedCompleted);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+    localStorage.setItem('completed', JSON.stringify(completed));
+  }, [todos, completed]);
+
   const addTodo = (newTodo) => {
-    setTodos([...todos, newTodo])
-  }
+    setTodos([...todos, newTodo]);
+    setCompleted([...completed, false]); 
+  };
 
   const deleteTodo = (index) => {
     const updatedTodos = todos.filter((_, i) => i !== index);
@@ -21,22 +34,23 @@ function App() {
 
   const toggleDone = (index) => {
     const updatedCompleted = [...completed];
-    updatedCompleted[index] = !updatedCompleted[index]; 
+    updatedCompleted[index] = !updatedCompleted[index];
     setCompleted(updatedCompleted);
   };
-  
 
   const startEditing = (index) => {
-    setEditIndex(index);
-    setEditValue(todos[index]); 
+    if (!completed[index]) {
+      setEditIndex(index);
+      setEditValue(todos[index]);
+    }
   };
 
   const saveEdit = () => {
-    const updatedTodos = todos.map((todo, i) => 
+    const updatedTodos = todos.map((todo, i) =>
       i === editIndex ? editValue : todo
     );
     setTodos(updatedTodos);
-    setEditIndex(null); 
+    setEditIndex(null);
     setEditValue('');
   };
 
@@ -47,8 +61,7 @@ function App() {
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.title}>Simple To-Do List</h1>
-      <label style={styles.label}>Add tasks:</label>
+      <h1 style={styles.title}>My To-Do List</h1>
       <TodoInput addTodo={addTodo} />
       <TodoList
         todos={todos}
@@ -70,26 +83,19 @@ export default App;
 
 const styles = {
   container: {
-    maxWidth: '600px',
-    margin: '100px auto',
-    padding: '20px',
+    maxWidth: '900px',
+    margin: '50px auto',
+    padding: '40px',
     background: '#FFFFFF',
-    borderRadius: '10px',
-    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)', 
-    border: '1px solid #E0E0E0',
+    borderRadius: '15px',
+    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)',
     width: '90%',
   },
   title: {
     textAlign: 'center',
-    marginBottom: '20px',
-    color: '#4A4A4A',
-    fontSize: '3rem'
+    marginBottom: '30px',
+    color: '#2C3E50',
+    fontSize: '2.5rem',
+    fontWeight: '600',
   },
-  label: {
-    display: 'block',
-    fontSize: '24px',
-    fontWeight: 'bold',
-    color: '#7A7A7A',
-    marginBottom: '10px'
-  }
-}
+};
